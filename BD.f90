@@ -217,7 +217,7 @@ call MPI_COMM_SIZE(MPI_COMM_WORLD, size, ierr)
 
 !!!!!!!!!!!!!! INTRO !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if(rank.eq.0)print*, 'Brownian Dynamic Simulator'
-if(rank.eq.0)print*, 'Version: ', _VERSION 
+if(rank.eq.0)print*, 'Git Version: ', _VERSION 
 if(rank.eq.0)print*, 'Number of processes', size
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

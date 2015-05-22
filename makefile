@@ -8,18 +8,18 @@ SRC =BD.f90 switch.f90  analysis.f90  aux.f90  calcforce.f90  cellneighbor.f90  
 SHELL = /bin/bash
 FFLAGS= -O3 # -fbounds-check -fbacktrace # ${F90FLAGS}
 
-LFLAGS=-cpp -D_VERSION=\"$(GIT_VERSION)\"
 
 FF = mpif77 #${F90}
 VER = ~/bin/NEQBD
 
-GIT_VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
+GIT_VERSION := $(shell git describe --abbrev=6 --dirty --always --tags)
+LFLAGS=-cpp -D_VERSION=\"$(GIT_VERSION)\"
 
 all:	$(TARGET)
 
 $(TARGET): $(SRC:.f90=.o)
 	$(FF) -o $(TARGET) $(SRC:.f90=.o) $(LFLAGS) $(LDFLAGS)
-$(SRC:.f90=.o):
+$(SRC:.f90=.o): $(SRC)
 	${FF} -c ${FFLAGS}  $(SRC) $(LFLAGS) $(LDFLAGS)
 
 install: all
