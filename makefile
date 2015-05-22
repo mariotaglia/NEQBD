@@ -2,7 +2,7 @@
 
 # put the name of the target program here
 TARGET = neqbd
-SRC =BD.f90 switch.f90  analysis.f90  aux.f90  calcforce.f90  cellneighbor.f90  energy.f90  forces.f90  initial.f90  IO.f90  move.f90  mpi.f90  randoms.f90  barostat.f90 splines.f90 averagepot.f90
+SRC = BD.f90 switch.f90  analysis.f90  aux.f90  calcforce.f90  cellneighbor.f90  energy.f90  forces.f90  initial.f90  IO.f90  move.f90  mpi.f90  randoms.f90  barostat.f90 splines.f90 averagepot.f90
 
 # some definitions
 SHELL = /bin/bash
@@ -19,6 +19,8 @@ all:	$(TARGET)
 
 $(TARGET): $(SRC:.f90=.o)
 	$(FF) -o $(TARGET) $(SRC:.f90=.o) $(LFLAGS) $(LDFLAGS)
+	cp $(TARGET) $(VER)
+
 $(SRC:.f90=.o): $(SRC)
 	${FF} -c ${FFLAGS}  $(SRC) $(LFLAGS) $(LDFLAGS)
 
@@ -37,15 +39,6 @@ depend dep:
 ifeq (.depend, $(wildcard .depend))
 include .depend
 endif
-
-
-
-
-
-
-
-
-
 
 
 
