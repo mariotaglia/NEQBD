@@ -10,7 +10,7 @@ FFLAGS= -O3 # -fbounds-check -fbacktrace # ${F90FLAGS}
 
 
 FF = mpif77 #${F90}
-VER = ~/bin/NEQBD
+VER = ~/bin/NEQBD_PERIOD2
 
 GIT_VERSION := $(shell git describe --abbrev=6 --dirty --always --tags)
 LFLAGS=-cpp -D_VERSION=\"$(GIT_VERSION)\"
@@ -35,6 +35,7 @@ realclean: clean
 
 depend dep:
 	@$(FF)  $(CFLAGS) -MM $(SRC) > .depend 
+
 
 ifeq (.depend, $(wildcard .depend))
 include .depend

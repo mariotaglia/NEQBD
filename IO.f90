@@ -158,6 +158,11 @@ read(20, *) period
 if(rank.eq.0)print*, 'Switching HALF period', period
 
 read(20, *) basura
+read(20, *) period2, phase
+if(rank.eq.0)print*, 'Switching HALF period for particles 2 ', period2, ',phase ', phase
+
+
+read(20, *) basura
 read(20, *) aveflag
 if(aveflag.eq.1) then
 if(rank.eq.0)print*, 'Averaged potential'

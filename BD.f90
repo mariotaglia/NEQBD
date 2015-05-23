@@ -36,12 +36,14 @@ real, allocatable :: xpos(:,:)
 integer, allocatable :: tp(:)
 integer, allocatable :: rtp(:)
 integer grcounter
-integer switch
 real fa
 real temperature
 real density
 real interpart
+
 integer period
+integer period2, phase
+
 integer switchtype
 real cutoff
 real BOcutoff
