@@ -159,6 +159,24 @@ else if (switchtype.eq.9) then ! switchtype = 9, LJ, sharp
      rint(2,1) = (rint(1,1)+rint(2,2))/2.0
      eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
 
+else if (switchtype.eq.10) then ! switchtype = 8, LJ blunt
+     alpha = abs(float(mod((k+period),2*period))/float(period)-1.0) ! from 0 to 1 V shape
+     alpha=1.0/(1.0+exp((-alpha+0.2)*25.0))
+     rint(1,1) = r1a - (r1a-r1b)*alpha
+     eint(1,1) = e1a - (e1a-e1b)*alpha
+     zint(1) = z1a - (z1a-z1b)*alpha
+     rint(2,2) = r2a - (r2a-r2b)*alpha
+     eint(2,2) = e2a - (e2a-e2b)*alpha
+     zint(2) = z2a - (z2a-z2b)*alpha
+
+     rint(1,2) = (rint(1,1)+rint(2,2))/2.0
+     eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
+     rint(2,1) = (rint(1,1)+rint(2,2))/2.0
+     eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+
+
+
+
 else
      alpha = float(iniMCstep+period)/float(period)*pi
      rint(1,1) = (r1a-r1b)*(cos(alpha)+1.0)/2.0 + r1b
