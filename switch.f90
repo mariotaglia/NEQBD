@@ -6,6 +6,8 @@ implicit none
 
 integer k
 real alpha, pH, f
+integer JJJ
+real*8 temp
 
 !!!!!!!!! switch potential
 
@@ -174,8 +176,45 @@ else if (switchtype.eq.10) then ! switchtype = 8, LJ blunt
      rint(2,1) = (rint(1,1)+rint(2,2))/2.0
      eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
 
+else if (switchtype.eq.20) then ! switchtype = 2, triangular function with maximum at tau/N
 
+     JJJ = 5
+     temp = float(mod(k,2*period))/2.0/float(period)*float(JJJ)
 
+     if(temp.le.1.0) then
+          alpha = float(mod(k,period*2/JJJ))/float(period)/2.0*float(JJJ)
+     else
+          alpha = 1.0 - (float(mod(k-period*2/JJJ,2*period))/float(period)/2.0/(1.0-1.0/float(JJJ)))
+     endif
+
+     pH=alpha*4.0+3.0
+     f=1.0/(1.0 + 10**(5.0-pH))
+     rint(1,1) = r1a
+     eint(1,1) = e1a
+     zint(1) = z1a - (z1a-z1b)*f
+     rint(2,2) = r2a
+     eint(2,2) = e2a
+     zint(2) = z2a - (z2a-z2b)*f
+     rint(1,2) = (rint(1,1)+rint(2,2))/2.0
+     eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
+     rint(2,1) = (rint(1,1)+rint(2,2))/2.0
+     eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+ 
+ else if (switchtype.eq.30) then ! switchtype = 30, pH-type function up to 5
+
+     alpha = abs(float(mod((k+period),2*period))/float(period)-1.0) ! from 0 to 1 V shape
+     pH=alpha*2.0+3.0 
+     f=1.0/(1.0 + 10**(5.0-pH))
+     rint(1,1) = r1a 
+     eint(1,1) = e1a
+     zint(1) = z1a - (z1a-z1b)*f
+     rint(2,2) = r2a 
+     eint(2,2) = e2a 
+     zint(2) = z2a - (z2a-z2b)*f
+     rint(1,2) = (rint(1,1)+rint(2,2))/2.0
+     eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
+     rint(2,1) = (rint(1,1)+rint(2,2))/2.0
+     eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
 
 else
      alpha = float(iniMCstep+period)/float(period)*pi
