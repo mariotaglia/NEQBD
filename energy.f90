@@ -221,7 +221,6 @@ open(file='POT12.dat', unit=902)
 open(file='POT22.dat', unit=903)
 
 do i = 1, 100
-
 xpos(2,2) = float(i)/100.0*cutoff
 
 tp(1) = 1
@@ -239,6 +238,11 @@ tp(2) = 2
 temp = energypointer(1,2)
 write(903,*)xpos(2,2), temp
 enddo
+
+close(901)
+close(902)
+close(903)
+
 end
 
 
