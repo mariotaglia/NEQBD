@@ -20,7 +20,7 @@ end module
 module externalforce
 real ef ! magnitude of external force
 integer eperiod ! period of rotation of external force
-real etheta ! current angle of external force
+real ex, ey ! current angle of external force
 end module
 
 module params
