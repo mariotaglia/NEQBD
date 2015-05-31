@@ -288,8 +288,8 @@ real, dimension(di) :: eforce
 integer l
 
 eforce(:) = 0.0
-eforce(1) = ef*sin(etheta)
-eforce(2) = ef*cos(etheta)
+eforce(1) = zint(tp(l))*ef*sin(etheta)
+eforce(2) = zint(tp(l))*ef*cos(etheta)
 endfunction
 
 function eenergy(l)
@@ -298,8 +298,8 @@ use externalforce
 implicit none
 real :: eenergy
 integer l
-eenergy = -xpos(l,1)*ef*sin(etheta)
-eenergy = eenergy-xpos(l,2)*ef*cos(etheta)
+eenergy = -xpos(l,1)*zint(tp(l))*ef*sin(etheta)
+eenergy = eenergy-xpos(l,2)*zint(tp(l))*ef*cos(etheta)
 endfunction
 
 
