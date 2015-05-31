@@ -11,10 +11,15 @@ integer jcell
 integer ccc
 
 real, external :: dist
-real, external :: eenergy
-
 
 interface
+
+function eenergy(i)
+use system
+integer i
+real :: eenergy
+endfunction
+
 function LJenergy(i, j)
 use system
 integer i, j

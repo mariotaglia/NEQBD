@@ -286,7 +286,8 @@ use externalforce
 implicit none
 real, dimension(di) :: eforce
 integer l
-eforce = 0.0
+
+eforce(:) = 0.0
 eforce(1) = ef*sin(etheta)
 eforce(2) = ef*cos(etheta)
 endfunction

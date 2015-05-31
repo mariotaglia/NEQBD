@@ -8,9 +8,14 @@ implicit none
 integer l,i
 
 real, external :: dist
-real, external :: eforce
 
 interface
+
+function eforce(i)
+use system
+integer i
+real, dimension(di) :: eforce
+endfunction
 function LJforce(i, j)
 use system
 integer i, j
@@ -130,9 +135,13 @@ implicit none
 integer l,i
 
 real, external :: dist
-real, external :: eforce
 
 interface
+function eforce(i)
+use system
+integer i
+real, dimension(di) :: eforce
+endfunction
 function LJforce(i, j)
 use system
 integer i, j
