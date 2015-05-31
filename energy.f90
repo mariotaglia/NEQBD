@@ -11,6 +11,8 @@ integer jcell
 integer ccc
 
 real, external :: dist
+real, external :: eenergy
+
 
 interface
 function LJenergy(i, j)
@@ -100,6 +102,8 @@ jcell = listproc(rank+1,ccc)
   enddo ! while i
   enddo ! k
 
+  senergy_tosend = senergy_tosend + eenergy(l) ! external contribution to energy
+
 l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
@@ -108,39 +112,39 @@ call update_mpi_energy ! sum the energies from all procs
 
 end
 
-real function energy(l)
-use system
-use nlist
-implicit none
-integer l,i
-real e, r
-real vect
-real, external :: dist
-integer ll
-integer, external :: whichcell
-integer icell, k
+!real function energy(l)
+!use system
+!use nlist
+!implicit none
+!integer l,i
+!real e, r
+!real vect
+!real, external :: dist
+!integer ll
+!integer, external :: whichcell
+!integer icell, k
 
-energy = 0
+!energy = 0
 
-ll = whichcell(l)
+!ll = whichcell(l)
 
-do k = 1, 3**di
-icell = cellneighbor(ll,k)
-i = head(icell)
-do while(i.ne.0)
-if(i.ne.l) then
+!do k = 1, 3**di
+!icell = cellneighbor(ll,k)
+!i = head(icell)
+!do while(i.ne.0)
+!if(i.ne.l) then
 
-e = eint(tp(i), tp(l))
-r = rint(tp(i), tp(l))
+!e = eint(tp(i), tp(l))
+!r = rint(tp(i), tp(l))
 
-vect = dist(l, i)
-energy = energy + e*((r/vect)**12)
-endif
-i = list(i)
-enddo
-enddo ! k
+!vect = dist(l, i)
+!energy = energy + e*((r/vect)**12)
+!endif
+!i = list(i)
+!enddo
+!enddo ! k
 
-end
+!end
 
 subroutine plotpot
 use system

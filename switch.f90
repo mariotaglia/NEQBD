@@ -2,6 +2,7 @@ subroutine switchpot(k)
 use system
 use params
 use mainm
+use externalforce
 implicit none
 
 integer k
@@ -9,8 +10,11 @@ real alpha, pH, f
 integer JJJ
 real*8 temp
 
-!!!!!!!!! switch potential
+!!!!! switch external force
+     alpha = abs(float(mod((k+eperiod),2*eperiod))/float(eperiod)-1.0) ! from 0 to 1 V shape
+     etheta = alpha*2.0*3.14159
 
+!!!!!!!!! switch potential
 if (switchtype.eq.0) then ! switchtype = 0, sudden jump
      if(mod(k, period).eq.0) then
      if(mod((k/period),2).eq.1) then
