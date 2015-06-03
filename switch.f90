@@ -9,6 +9,7 @@ real alpha, pH, f
 integer JJJ
 real*8 temp
 
+
 !!!!!!!!! switch potential
 
 if (switchtype.eq.0) then ! switchtype = 0, sudden jump
@@ -129,6 +130,25 @@ else if (switchtype.eq.7) then ! switchtype = 7, pH-type function sharp tip, see
      eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
      rint(2,1) = (rint(1,1)+rint(2,2))/2.0
      eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+
+else if (switchtype.eq.17) then ! switchtype = 7, pH-type function sharp tip, see Fig 3-iii PNAS 2014
+
+     temp=40.0
+
+     alpha = abs(float(mod((k+period),2*period))/float(period)-1.0) ! from 0 to 1 V shape
+     pH=(exp(temp*(alpha-0.5))-exp(-temp*(alpha-0.5)))*2.0/(exp(temp*0.5)-exp(-temp*0.5)) + 5.0
+     f=1.0/(1.0 + 10**(5.0-pH))
+     rint(1,1) = r1a 
+     eint(1,1) = e1a
+     zint(1) = z1a - (z1a-z1b)*f
+     rint(2,2) = r2a 
+     eint(2,2) = e2a 
+     zint(2) = z2a - (z2a-z2b)*f
+     rint(1,2) = (rint(1,1)+rint(2,2))/2.0
+     eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
+     rint(2,1) = (rint(1,1)+rint(2,2))/2.0
+     eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+
 
 
 else if (switchtype.eq.8) then ! switchtype = 8, LJ blunt
