@@ -18,6 +18,7 @@ integer seed
 end module
 
 module externalforce
+integer eftype
 real ef ! magnitude of external force
 integer eperiod ! period of rotation of external force
 real ex, ey ! current angle of external force

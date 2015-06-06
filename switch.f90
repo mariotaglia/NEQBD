@@ -11,8 +11,14 @@ integer JJJ
 real*8 temp
 
 !!!!! switch external force
+
+     if(eftype.eq.1) then ! circular motion
      ex = (abs(float(mod((k+eperiod),2*eperiod))/float(eperiod)-1.0)-0.5)*2.0 ! from 0 to 1 V shape
      ey = (abs(float(mod((k+eperiod+eperiod/2),2*eperiod))/float(eperiod)-1.0)-0.5)*2.0 ! from 0 to 1 V shape
+     else if (eftype.eq.2) then ! vibration only
+     ex = (abs(float(mod((k+eperiod),2*eperiod))/float(eperiod)-1.0)-0.5)*2.0 ! from 0 to 1 V shape
+     ey = 0
+     endif 
 
 !!!!!!!!! switch potential
 if (switchtype.eq.0) then ! switchtype = 0, sudden jump

@@ -255,7 +255,8 @@ if(rank.eq.0)print*, 'Seed', seed
 
 
 read(20, *) basura
-read(20, *) ef, eperiod
+read(20, *) eftype, ef, eperiod
+if(rank.eq.0)print*, 'External force type:', eftype
 if(rank.eq.0)print*, 'External force:', ef
 if(rank.eq.0)print*, 'Period of external force:', eperiod
 
