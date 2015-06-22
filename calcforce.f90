@@ -10,6 +10,12 @@ integer l,i
 real, external :: dist
 
 interface
+
+function eforce(i)
+use system
+integer i
+real, dimension(di) :: eforce
+endfunction
 function LJforce(i, j)
 use system
 integer i, j
@@ -105,6 +111,9 @@ jcell = listproc(rank+1,ccc)
   enddo ! while i
   enddo ! k
 
+fff(:) = eforce(l) ! external force for particle l
+forces_tosend(l, :) = forces_tosend(l, :) + fff(:)
+
 l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
@@ -128,6 +137,11 @@ integer l,i
 real, external :: dist
 
 interface
+function eforce(i)
+use system
+integer i
+real, dimension(di) :: eforce
+endfunction
 function LJforce(i, j)
 use system
 integer i, j
@@ -230,6 +244,11 @@ jcell = listproc(rank+1,ccc)
   i = list(i) ! next in line
   enddo ! while i
   enddo ! k
+
+fff = eforce(l) ! external contribution to virial
+do kk = 1, di
+pres_tosend = pres_tosend + xpos(l,kk)*fff(kk)	
+enddo
 
 l = list(l) ! next in line
 enddo ! while l

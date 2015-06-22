@@ -5,6 +5,7 @@ use BD
 use mainm
 use mpi
 use random
+use externalforce
 implicit none
 character basura
 integer i, j, k
@@ -251,7 +252,18 @@ if(rank.eq.0)print*, 'Use barostat? ', barostat, ' Constant ', barostat_const, '
 read(20, *) basura
 read(20, *) seed
 if(rank.eq.0)print*, 'Seed', seed
+
+
+read(20, *) basura
+read(20, *) eftype, ef, eperiod
+if(rank.eq.0)print*, 'External force type:', eftype
+if(rank.eq.0)print*, 'External force:', ef
+if(rank.eq.0)print*, 'Period of external force:', eperiod
+
 close (20)
+
+
+
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Variable initalization an allocation

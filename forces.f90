@@ -280,4 +280,26 @@ YAVenergy = YAVenergy - (LJpre/cutoff12 + zint(tp(i))*zint(tp(l))*eexp* &
 eexpav(tp(i),tp(l))*exp(-cutoff/elen)/cutoff)
 endfunction
 
+function eforce(l)
+use system
+use externalforce
+implicit none
+real, dimension(di) :: eforce
+integer l
+
+eforce(:) = 0.0
+eforce(1) = zint(tp(l))*ef*ex
+eforce(2) = zint(tp(l))*ef*ey
+endfunction
+
+function eenergy(l)
+use system
+use externalforce
+implicit none
+real :: eenergy
+integer l
+eenergy = -xpos(l,1)*zint(tp(l))*ef*ex
+eenergy = eenergy-xpos(l,2)*zint(tp(l))*ef*ey
+endfunction
+
 
