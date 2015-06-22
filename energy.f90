@@ -26,6 +26,12 @@ integer i, j
 real :: LJenergy
 endfunction
 
+function HSenergy(i, j)
+use system
+integer i, j
+real :: HSenergy
+endfunction
+
 function LJEenergy(i, j)
 use system
 integer i, j
@@ -75,6 +81,8 @@ case ('ATR')
 energypointer => LJEenergy
 case ('TAB')
 energypointer => tableenergy
+case ('HSY')
+energypointer => HSenergy
 end select
 
 call update_mpi_pos ! send the position from proc 0 to all others
@@ -172,6 +180,13 @@ integer i, j
 real :: LJenergy
 endfunction
 
+function HSenergy(i, j)
+use system
+integer i, j
+real :: HSenergy
+endfunction
+
+
 function LJEenergy(i, j)
 use system
 integer i, j
@@ -219,6 +234,8 @@ case ('ATR')
 energypointer => LJEenergy
 case ('TAB')
 energypointer => tableenergy
+case ('HSY')
+energypointer => HSenergy
 end select
 
 xpos(1,1) = 0.0

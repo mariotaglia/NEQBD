@@ -21,6 +21,11 @@ use system
 integer i, j
 real, dimension(di) :: LJforce
 endfunction
+function HSforce(i, j)
+use system
+integer i, j
+real, dimension(di) :: HSforce
+endfunction
 function Yforce(i, j)
 use system
 integer i, j
@@ -64,6 +69,8 @@ case ('LJN')
 forcepointer => LJNforce
 case ('YUK')
 forcepointer => Yforce
+case ('HSY')
+forcepointer => HSforce
 case ('YAV')
 forcepointer => YAVforce
 case ('ATR')
@@ -137,6 +144,11 @@ integer l,i
 real, external :: dist
 
 interface
+function HSforce(i, j)
+use system
+integer i, j
+real, dimension(di) :: HSforce
+endfunction
 function eforce(i)
 use system
 integer i
@@ -199,6 +211,8 @@ case ('ATR')
 forcepointer => LJEforce
 case ('TAB')
 forcepointer => tableforce
+case ('HSY')
+forcepointer => HSforce
 end select
 
 call update_mpi_pos ! send the position from proc 0 to all others

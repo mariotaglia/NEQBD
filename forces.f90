@@ -5,7 +5,52 @@
 ! force, calcpres, penergy, plotpot and avepot
 !
 
+function HSforce(l, i)
+use system
+use BD
+implicit none
+real, external :: dist
+real, external :: distk
+real vect14, LJpre, vectkk
+real, dimension(di) :: HSforce
+integer kk
+integer l, i
+real pre1, rrr, vect
+vect=dist(l,i)
+rrr = rint(tp(i),tp(l))
+pre1 = 1.0/(jump**2)
+if(vect.lt.rrr) then
+do kk = 1, di
+    vectkk = distk(l,i,kk) ! distance in one of the dimenstions only
+    HSforce(kk) = vectkk*(-pre1*(vect-rrr)/vect + zint(tp(i))*zint(tp(l))*eexp*(1.0/elen/vect+1.0/vect/vect)*exp(-vect/elen)/vect)
+enddo ! kk
+else
+do kk = 1, di
+    vectkk = distk(l,i,kk) ! distance in one of the dimenstions only
+    HSforce(kk) = vectkk*(zint(tp(i))*zint(tp(l))*eexp*(1.0/elen/vect+1.0/vect/vect)*exp(-vect/elen)/vect)
+enddo ! kk
+endif
+endfunction
 
+function HSenergy(l, i)
+use system
+use BD
+implicit none
+real, external :: dist
+real LJ(types,types), vect12, LJpre
+real :: HSenergy
+integer l, i
+real pre1, rrr, vect
+vect=dist(l,i)
+rrr = rint(tp(i),tp(l))
+pre1 = 1.0/(jump**2)
+if(vect.lt.rrr) then
+    HSenergy = 0.25*pre1*(vect-rrr)**2 + zint(tp(i))*zint(tp(l))*eexp*exp(-vect/elen)/vect
+else
+    HSenergy = zint(tp(i))*zint(tp(l))*eexp*exp(-vect/elen)/vect
+endif
+    HSenergy = HSenergy - (LJpre/cutoff12 + zint(tp(i))*zint(tp(l))*eexp*exp(-cutoff/elen)/cutoff)
+endfunction
 
 function LJforce(l, i)
 use system

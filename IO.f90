@@ -57,6 +57,12 @@ read(20, *) basura
 read(20, *) eexp, elen
 if(rank.eq.0)print*,  'Prefactor exponetial attracion:',  eexp, ' decay: ', elen
 
+case ('HSY')
+if(rank.eq.0)print*, 'Yukawa attraction between A and B + Hard Sphere'
+read(20, *) basura
+read(20, *) eexp, elen
+if(rank.eq.0)print*,  'Prefactor exponetial attracion:',  eexp, ' decay: ', elen
+
 case ('YAV')
 if(rank.eq.0)print*, 'Yukawa attraction between A and B + LJ12 with averaged charged'
 read(20, *) basura
