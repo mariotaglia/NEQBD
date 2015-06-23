@@ -17,6 +17,9 @@ real*8 temp
      else if (eftype.eq.2) then ! vibration only
      ex = (abs(float(mod((k+eperiod),2*eperiod))/float(eperiod)-1.0)-0.5)*2.0 ! from 0 to 1 V shape
      ey = 0
+     else if (eftype.eq.3) then ! better circular
+     ex = -sin(float(k)/float(2*eperiod)*2*3.14159)
+     ey = cos(float(k)/float(2*eperiod)*2*3.14159)
      endif 
 
 !!!!!!!!! switch potential
