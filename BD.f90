@@ -40,6 +40,8 @@ integer, parameter :: types = 2
 Integer, allocatable :: Nparti(:)
 real xlim
 real, allocatable :: xpos(:,:)
+real, allocatable :: xposCOM(:,:) ! position of COM averaged over one period
+real, allocatable :: xposCOMt(:,:) ! position of COM averaged over one period
 integer, allocatable :: tp(:)
 integer, allocatable :: rtp(:)
 integer grcounter
@@ -55,7 +57,7 @@ real BOcutoff
 real ddd_cutoff
 real cutoff12
 character*3 forcetype
-
+integer saveCOM
 integer, parameter :: maxn = 2000
 
 real NLJ
@@ -308,6 +310,9 @@ endif
 call analisis0(k, Nperiod)
 !!!!!!!!! switch potential
 call switchpot(k)
+!!!!!!!!! integrate COM
+call intCOM(k)
+
 call analisis(k, Nperiod, overdrive)
 
 
@@ -480,4 +485,17 @@ if(((flagdis.eq.1).and.(mod(Nperiod, saveeveryothere).eq.0).and.(mod(k, int(peri
 endif
 end
 
+subroutine intCOM(k) ! integrates COM positions over one period of external field...
+use system
+use externalforce
+implicit none
+integer k
 
+xposCOMt = xposCOMt + xpos
+
+if(mod(k, eperiod).eq.0) then
+ xposCOM = xposCOMt/float(eperiod)
+ xposCOMt = 0.0
+endif
+
+end subroutine

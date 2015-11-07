@@ -16,6 +16,23 @@ dist = vect**(0.5)
 end
 
 
+real function distCOM(l, i)
+use system
+implicit none
+integer i, j, l
+real vect
+real DX(di)
+
+vect = 0;
+do j = 1, di
+    DX(j)=xposCOM(l, j)-xposCOM(i, j)
+    DX(j)=DX(j)-nint(DX(j)/xlim)*xlim
+    vect = vect + DX(j)**2
+enddo
+distCOM = vect**(0.5)
+end
+
+
 real function dist2(l, i)
 use system
 implicit none

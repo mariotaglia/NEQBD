@@ -125,11 +125,21 @@ implicit none
 integer i, j 
 real vect
 real, external :: dist
+real, external :: distCOM
 
 GR = 0 ; !reset GR
 do i = 1, Npart
 do j = 1, Npart
+
+if(saveCOM.eq.0) then
 vect = dist(i, j)
+endif
+
+if(saveCOM.eq.1) then
+vect = distCOM(i, j)
+endif
+
+
 GR(int(vect/dbin)+1,tp(i),tp(j)) = GR(int(vect/dbin)+1,tp(i),tp(j))+1.0
 enddo
 enddo
@@ -761,6 +771,7 @@ integer i, j, ccc
 integer icell, jcell
 real vect
 real, external :: dist
+real, external :: distCOM
 integer k,l
 GR_tosend = 0.0
 GR = 0 ; !reset GR
@@ -777,8 +788,16 @@ jcell = listproc(rank+1,ccc)
   i = head(icell) 
 
   do while (i.ne.0) ! loop over all particles in icell
- 
+
+if(saveCOM.eq.0) then 
 vect = dist(l, i)
+endif
+if(saveCOM.eq.1) then
+vect = distCOM(l, i)
+endif
+
+
+
 if(vect.lt.cutoff) then
 GR_tosend(int(vect/dbin)+1,tp(l),tp(i)) = GR_tosend(int(vect/dbin)+1,tp(l),tp(i))+1.0
 endif

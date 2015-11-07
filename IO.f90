@@ -238,6 +238,11 @@ if(rank.eq.0)print*, 'Save data every ', saveeveryother, ' periods'
 if(rank.eq.0)print*, 'Save energy data every ', saveeveryothere, ' periods'
 
 read(20, *) basura
+read(20, *) saveCOM
+if(rank.eq.0)print*, 'Save COM averaged over one cycle?', saveCOM
+
+
+read(20, *) basura
 read(20, *) savepoints, savepointse
 if(rank.eq.0)print*, 'Number of points to average inside period', savepoints
 if(rank.eq.0)print*, 'Number of points to average inside period (energy)', savepointse
@@ -277,6 +282,10 @@ close (20)
 
 allocate(Nparti(types))
 allocate(xpos(Npart,di))
+allocate(xposCOM(Npart,di))
+xposCOM = 0.0
+allocate(xposCOMt(Npart,di))
+xposCOMt = 0.0
 allocate(forces(Npart,di))
 allocate(forces_tosend(Npart,di))
 allocate(tp(Npart))
@@ -300,9 +309,18 @@ do j = 1, Npart
    else
    atom = ' O ' 
    endif
-
+if(saveCOM.eq.0) then ! save instant positions
 if(di.eq.2)write(10, *)atom, xpos(j,1), xpos(j,2) , 0.0, rint(tp(j),tp(j))
 if(di.eq.3)write(10, *)atom, xpos(j,1), xpos(j,2) , xpos(j,3), rint(tp(j),tp(j))
+endif
+
+if(saveCOM.eq.1) then ! save positions averaged over one period of the external field
+if(di.eq.2)write(10, *)atom, xposCOM(j,1), xposCOM(j,2) , 0.0, rint(tp(j),tp(j))
+if(di.eq.3)write(10, *)atom, xposCOM(j,1), xposCOM(j,2) , xposCOM(j,3), rint(tp(j),tp(j))
+endif
+
+
+
 enddo
    write(11, *)(rint(tp(j),tp(j)), j=1,Npart)
 end
