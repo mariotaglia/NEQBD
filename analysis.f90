@@ -798,7 +798,7 @@ endif
 
 
 
-if(vect.lt.cutoff) then
+if(vect.lt.xlim) then
 GR_tosend(int(vect/dbin)+1,tp(l),tp(i)) = GR_tosend(int(vect/dbin)+1,tp(l),tp(i))+1.0
 endif
 
