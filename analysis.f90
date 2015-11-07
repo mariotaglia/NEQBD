@@ -140,7 +140,10 @@ vect = distCOM(i, j)
 endif
 
 
+if(vect.lt.xlim) then
 GR(int(vect/dbin)+1,tp(i),tp(j)) = GR(int(vect/dbin)+1,tp(i),tp(j))+1.0
+endif
+
 enddo
 enddo
 
@@ -170,7 +173,7 @@ real GRtemp(Ngrmax)
 real firstpeak
 integer l
 
-call paddgr
+call addgr
 
 if(rank.eq.0) then
 do i = 1, types
