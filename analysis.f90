@@ -271,7 +271,7 @@ integer i
 
 dbin = min(r1a, r2a, r1b,r2b)/10
 
-Ngrmax = int(cutoff/dbin)
+Ngrmax = int(xlim/dbin)+10
 
 print*, 'Ngrmax', Ngrmax
 
