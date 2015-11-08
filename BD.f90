@@ -494,7 +494,7 @@ integer k
 xposCOMt = xposCOMt + xpos
 
 if(mod(k, 2*eperiod).eq.0) then
- xposCOM = xposCOMt/float(eperiod)
+ xposCOM = xposCOMt/float(eperiod)/2.0
  xposCOMt = 0.0
 endif
 
