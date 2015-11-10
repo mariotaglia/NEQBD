@@ -277,6 +277,20 @@ else if (switchtype.eq.20) then ! switchtype = 2, triangular function with maxim
      rint(2,1) = (rint(1,1)+rint(2,2))/2.0
      eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
 
+
+else if (switchtype.eq.100) then ! switchtype = 100, fixed potential with non-additive radii to use with HS
+     rint(1,1) = r1a
+     eint(1,1) = e1a
+     zint(1) = z1a
+     rint(2,2) = r2a
+     eint(2,2) = e2a
+     zint(2) = z2a
+
+     rint(1,2) = r1b
+     eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
+     rint(2,1) = r2b
+     eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+
 else
      alpha = float(iniMCstep+period)/float(period)*pi
      rint(1,1) = (r1a-r1b)*(cos(alpha)+1.0)/2.0 + r1b
@@ -290,6 +304,9 @@ else
      eint(1,2) = (eint(1,1)*eint(2,2))**(0.5)
      rint(2,1) = (rint(1,1)+rint(2,2))/2.0
      eint(2,1) = (eint(1,1)*eint(2,2))**(0.5)
+
+
+
 endif ! other switchtype mean no switch
 
 
