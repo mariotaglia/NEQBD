@@ -74,3 +74,12 @@ integer i, j, l
     distk=distk-nint(distk/xlim)*xlim
 end
 
+real function distk0(l, j)
+use system
+implicit none
+integer l, j
+    distk0=xpos(l, j)
+    distk0=distk0-nint(distk0/xlim)*xlim
+end
+
+

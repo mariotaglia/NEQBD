@@ -489,9 +489,14 @@ subroutine intCOM(k) ! integrates COM positions over one period of external fiel
 use system
 use externalforce
 implicit none
-integer k
+real, external :: distk0
+integer k, kk, i
 
-xposCOMt = xposCOMt + xpos
+do i =  1, Npart
+do kk = 1, di
+xposCOMt(i,kk) = xposCOMt(i,kk) + distk0(i,kk)
+enddo ! kk
+enddo ! i
 
 if(mod(k, 2*eperiod).eq.0) then
  xposCOM = xposCOMt/float(eperiod)/2.0
