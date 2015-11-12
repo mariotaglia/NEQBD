@@ -294,6 +294,7 @@ call switchpot(iniMCstep-1) ! updates the potential to current time step
 
 !!!!!!!!!!!!!!!! MAIN MC LOOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 cperiod = saveeveryothere ! for energy disipation
+xposCOM = xpos
 
 do k = iniMCstep, MCstep
 
@@ -489,17 +490,17 @@ subroutine intCOM(k) ! integrates COM positions over one period of external fiel
 use system
 use externalforce
 implicit none
-real, external :: distk0
+real, external :: distkCOM
 integer k, kk, i
 
 do i =  1, Npart
 do kk = 1, di
-xposCOMt(i,kk) = xposCOMt(i,kk) + distk0(i,kk)
+xposCOMt(i,kk) = xposCOMt(i,kk) + distkCOM(i,i,kk)
 enddo ! kk
 enddo ! i
 
 if(mod(k, 2*eperiod).eq.0) then
- xposCOM = xposCOMt/float(eperiod)/2.0
+ xposCOM = xposCOM + xposCOMt/float(eperiod)/2.0
  xposCOMt = 0.0
 endif
 
