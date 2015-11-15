@@ -491,7 +491,7 @@ use system
 use externalforce
 implicit none
 real, external :: distkCOM
-integer k, kk, i
+integer k, kk, i,j
 
 do i =  1, Npart
 do kk = 1, di
@@ -501,6 +501,11 @@ enddo ! i
 
 if(mod(k, 2*eperiod).eq.0) then
  xposCOM = xposCOM + xposCOMt/float(eperiod)/2.0
+do i =  1, Npart
+do j = 1, di
+ xposCOM = mod(xposCOM(i,j)+xlim, xlim)
+enddo ! j
+enddo ! i
  xposCOMt = 0.0
 endif
 
