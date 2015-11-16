@@ -87,22 +87,7 @@ jcell = listproc(rank+1,ccc)
     if(dist(l,i).lt.cutoff) then
 
 
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-    fff(:) = LJforce(l, i)
-case ('LJN')
-    fff(:) = LJNforce(l, i)
-case ('YUK')
-    fff(:) = Yforce(l, i)
-case ('HSY')
     fff(:) = HSforce(l, i)
-case ('YAV')
-    fff(:) = YAVforce(l, i)
-case ('ATR')
-    fff(:) =  LJEforce(l, i)
-case ('TAB')
-    fff(:) = tableforce(l, i)
-end select
 
 
    ! DEBUG
@@ -221,22 +206,7 @@ jcell = listproc(rank+1,ccc)
 !!! Calc force*vector between l and i
 
     if(dist(l,i).lt.cutoff) then
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-    fff(:) = LJforce(l, i)
-case ('LJN')
-    fff(:) = LJNforce(l, i)
-case ('YUK')
-    fff(:) = Yforce(l, i)
-case ('HSY')
     fff(:) = HSforce(l, i)
-case ('YAV')
-    fff(:) = YAVforce(l, i)
-case ('ATR')
-    fff(:) =  LJEforce(l, i)
-case ('TAB')
-    fff(:) = tableforce(l, i)
-end select
     do kk = 1, di 
     pres_tosend = pres_tosend + distk(l, i, kk)*fff(kk) 
 

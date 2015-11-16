@@ -91,24 +91,7 @@ jcell = listproc(rank+1,ccc)
 
   do while (i.ne.0)
   if(dist(l,i).lt.cutoff) then
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-  senergy_tosend = senergy_tosend + LJenergy(l, i)
-case ('LJN')
-  senergy_tosend = senergy_tosend + LJNenergy(l, i)
-case ('YUK')
-  senergy_tosend = senergy_tosend + Yenergy(l, i)
-case ('YAV')
-  senergy_tosend = senergy_tosend + YAVenergy(l, i)
-case ('ATR')
-  senergy_tosend = senergy_tosend + LJEenergy(l, i)
-case ('TAB')
-  senergy_tosend = senergy_tosend + tableenergy(l, i)
-case ('HSY')
   senergy_tosend = senergy_tosend + HSenergy(l, i)
-end select
-
-
   endif
   i = list(i) ! next in line
   enddo ! while i
@@ -233,64 +216,19 @@ xpos(2,2) = float(i)/100.0*cutoff
 
 tp(1) = 1
 tp(2) = 1
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-  temp =  LJenergy(1,2)
-case ('LJN')
-   temp = LJNenergy(1,2)
-case ('YUK')
-   temp = Yenergy(1,2)
-case ('YAV')
-   temp = YAVenergy(1,2)
-case ('ATR')
-   temp = LJEenergy(1,2)
-case ('TAB')
-   temp = tableenergy(1,2)
-case ('HSY')
    temp = HSenergy(1,2)
-end select
 
 write(901,*)xpos(2,2), temp
 
 tp(1) = 1
 tp(2) = 2
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-  temp =  LJenergy(1,2)
-case ('LJN')
-   temp = LJNenergy(1,2)
-case ('YUK')
-   temp = Yenergy(1,2)
-case ('YAV')
-   temp = YAVenergy(1,2)
-case ('ATR')
-   temp = LJEenergy(1,2)
-case ('TAB')
-   temp = tableenergy(1,2)
-case ('HSY')
    temp = HSenergy(1,2)
-end select
 
 write(902,*)xpos(2,2), temp
 
 tp(1) = 2
 tp(2) = 2
-select case (forcetype)
-case ('LJ0') ! standard LJ... no aditional parameters need
-  temp =  LJenergy(1,2)
-case ('LJN')
-   temp = LJNenergy(1,2)
-case ('YUK')
-   temp = Yenergy(1,2)
-case ('YAV')
-   temp = YAVenergy(1,2)
-case ('ATR')
-   temp = LJEenergy(1,2)
-case ('TAB')
-   temp = tableenergy(1,2)
-case ('HSY')
    temp = HSenergy(1,2)
-end select
 
 write(903,*)xpos(2,2), temp
 enddo
