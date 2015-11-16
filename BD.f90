@@ -503,7 +503,7 @@ if(mod(k, 2*eperiod).eq.0) then
  xposCOM = xposCOM + xposCOMt/float(eperiod)/2.0
 do i =  1, Npart
 do j = 1, di
- xposCOM = mod(xposCOM(i,j)+xlim, xlim)
+ xposCOM(i,j) = mod(xposCOM(i,j)+xlim, xlim)
 enddo ! j
 enddo ! i
  xposCOMt = 0.0
