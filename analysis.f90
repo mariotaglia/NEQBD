@@ -201,7 +201,7 @@ GR(1,:,:) = 0.0 ! remove self-interaction
 if(saveallfiles.eq.1) then
 do i = 1, types
 do j = i, types
-write(filename,'(A3, I3.3, A1, I3.3, A1, I8.8, A4)')'GR.', i,'.',j,'.', step,'.dat'
+write(filename,'(A3, I3.3, A1, I3.3, A1, I10.10, A4)')'GR.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=30)
 do k = 1,Ngrmax
 write(30,*)rpos(k), GR(k,i,j)
@@ -465,11 +465,11 @@ enddo ! ii
 if(rank.eq.0) then
 do i = 1, types
 do j = i, types
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO4.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO4.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=40)
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO6.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO6.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=140)
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO2.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO2.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=240)
 do ii = iBOmin, iBOmax
 write(40,*)rpos(ii), bo4r(i, j, ii)
@@ -484,11 +484,11 @@ close(240)
 enddo !i
 enddo !j
 
-write(filename,'(A5, I8.8, A4)')'BO4t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO4t.', step,'.dat'
 open(file=filename,unit=40)
-write(filename,'(A5, I8.8, A4)')'BO6t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO6t.', step,'.dat'
 open(file=filename,unit=140)
-write(filename,'(A5, I8.8, A4)')'BO2t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO2t.', step,'.dat'
 open(file=filename,unit=240)
 
 do ii = iBOmin, iBOmax
@@ -685,11 +685,11 @@ if(rank.eq.0) then
 if(saveallfiles.eq.1) then
 do i = 1, types
 do j = i, types
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO4.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO4.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=40)
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO6.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO6.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=140)
-write(filename,'(A4, I3.3, A1, I3.3, A1, I8.8, A4)')'BO2.', i,'.',j,'.', step,'.dat'
+write(filename,'(A4, I3.3, A1, I3.3, A1, I10.10, A4)')'BO2.', i,'.',j,'.', step,'.dat'
 open(file=filename,unit=240)
 do ii = iBOmin, iBOmax
 write(40,*)rpos(ii), bo4r(i, j, ii)
@@ -706,11 +706,11 @@ enddo !j
 endif
 
 if(saveallfiles.eq.1) then
-write(filename,'(A5, I8.8, A4)')'BO4t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO4t.', step,'.dat'
 open(file=filename,unit=40)
-write(filename,'(A5, I8.8, A4)')'BO6t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO6t.', step,'.dat'
 open(file=filename,unit=140)
-write(filename,'(A5, I8.8, A4)')'BO2t.', step,'.dat'
+write(filename,'(A5, I10.10, A4)')'BO2t.', step,'.dat'
 open(file=filename,unit=240)
 
 do ii = iBOmin, iBOmax
