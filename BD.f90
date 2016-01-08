@@ -22,6 +22,7 @@ integer eftype
 real ef ! magnitude of external force
 integer eperiod ! period of rotation of external force
 real ex, ey ! current angle of external force
+real*8 alfaD ! angle of vibration
 end module
 
 module params

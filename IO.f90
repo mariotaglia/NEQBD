@@ -271,6 +271,13 @@ if(rank.eq.0)print*, 'External force type:', eftype
 if(rank.eq.0)print*, 'External force:', ef
 if(rank.eq.0)print*, 'Period of external force:', eperiod
 
+if(eftype.eq.5) then
+read(20, *) basura
+read(20, *) alfaD
+if(rank.eq.0)print*, 'AlfaD:', alfaD
+
+
+
 close (20)
 
 
