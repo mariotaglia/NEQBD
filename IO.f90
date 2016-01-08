@@ -275,7 +275,7 @@ if(eftype.eq.5) then
 read(20, *) basura
 read(20, *) alfaD
 if(rank.eq.0)print*, 'AlfaD:', alfaD
-
+endif
 
 
 close (20)
