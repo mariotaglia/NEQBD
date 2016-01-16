@@ -262,7 +262,8 @@ if(rank.eq.0)print*, 'Use barostat? ', barostat, ' Constant ', barostat_const, '
 
 read(20, *) basura
 read(20, *) seed
-if(rank.eq.0)print*, 'Seed', seed
+seed = seed + 32423*rank
+print*, 'Rank', rank, 'Seed', seed
 
 
 read(20, *) basura
