@@ -334,6 +334,8 @@ endif
 
 if(timming.eq.1)call cpu_time(start)
 if(rank.eq.0)call BDmove ! only processor 0 moves particles 
+call update_mpi_pos ! send the position from proc 0 to all others
+
 if(timming.eq.1)call cpu_time(finish)
 if(timming.eq.1) then
   if(rank.eq.0)print '("BDmove time = ",f6.4," seconds.")',finish-start

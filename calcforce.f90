@@ -79,8 +79,6 @@ case ('TAB')
 forcepointer => tableforce
 end select
 
-call update_mpi_pos ! send the position from proc 0 to all others
-
 forces_tosend = 0
 
 do ccc = 1, Nlistproc(rank+1)
@@ -125,8 +123,6 @@ l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
 
-call update_mpi_force ! send the forces from all procs to proce 0
-    
 !DEBUG
 !stop
 
@@ -215,8 +211,6 @@ case ('HSY')
 forcepointer => HSforce
 end select
 
-call update_mpi_pos ! send the position from proc 0 to all others
-
 pres_tosend = 0
 
 do ccc = 1, Nlistproc(rank+1)
@@ -267,8 +261,6 @@ enddo
 l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
-
-call update_mpi_pres ! send the forces from all procs to proce 0
 
 pres = (Npart*temperature + (1.0/di)*pres)/(xlim**di)
 end

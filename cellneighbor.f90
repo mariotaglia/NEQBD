@@ -48,7 +48,7 @@ integer xtemp, N, NN
 integer icell
 
 ! cell system !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-sidecell = int(xlim/cutoff)+1
+sidecell = int(xlim/cutoff)
 Ncell = sidecell**di
 
 allocate(list(Npart))
