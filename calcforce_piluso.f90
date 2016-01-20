@@ -59,8 +59,6 @@ real fff(di)
 integer jcell
 integer ccc
 
-call update_mpi_pos ! send the position from proc 0 to all others
-
 forces_tosend = 0
 
 do ccc = 1, Nlistproc(rank+1)
@@ -179,8 +177,6 @@ real fff(di)
 integer jcell
 integer ccc
 integer kk
-
-call update_mpi_pos ! send the position from proc 0 to all others
 
 pres_tosend = 0
 

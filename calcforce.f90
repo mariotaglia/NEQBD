@@ -123,6 +123,8 @@ l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
 
+call update_mpi_force ! send the forces from all procs to proce 0
+    
 !DEBUG
 !stop
 
@@ -261,6 +263,8 @@ enddo
 l = list(l) ! next in line
 enddo ! while l
 enddo ! jcell
+
+call update_mpi_pres ! send the forces from all procs to proce 0
 
 pres = (Npart*temperature + (1.0/di)*pres)/(xlim**di)
 end

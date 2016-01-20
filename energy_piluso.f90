@@ -67,8 +67,6 @@ endfunction
 end interface
 
 
-call update_mpi_pos ! send the position from proc 0 to all others
-
 senergy_tosend = 0.0
 
 do ccc = 1, Nlistproc(rank+1)
